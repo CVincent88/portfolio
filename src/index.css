@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@500&family=Inter:wght@300&family=Lobster+Two:ital@1&display=swap');
+
 * {
    box-sizing: border-box;
    margin: 0;
    padding: 0;
+   cursor: none;
 }
 
 body {
@@ -13,4 +16,9 @@ body {
 
 code {
    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.hero-font{
+   font-family: "League Spartan", sans-serif;
+   font-size: 20px;
 }
