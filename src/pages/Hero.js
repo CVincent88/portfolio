@@ -1,15 +1,46 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import littlePrince from "../assets/images/the_little_prince_background.jpg";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { colors } from "../utils/colors";
 import { LanguageContext, DisplayContext } from "../utils/context";
-import DarkScreen from "../components/DarkScreen";
+import BackgroundImage from "../components/BackgroundImage";
+
+import { motion } from "framer-motion";
+
+const wiggle = keyframes`
+   0%{
+      transform: translateY(0) rotate(0deg);
+   }
+   20%{
+      transform: translateY(-3px) rotate(0deg);
+   }
+   45%{
+      transform: translateY(-3px) rotate(20deg);
+   }
+   50%{
+      transform: translateY(-3px) rotate(-20deg);
+   }
+   55%{
+      transform: translateY(-3px) rotate(20deg);
+   }
+   60%{
+      transform: translateY(-3px) rotate(-20deg);
+   }
+   65%{
+      transform: translateY(-3px) rotate(20deg);
+   }
+   70%{
+      transform: translateY(-3px) rotate(0deg);
+   }
+   100%{
+      transform: translateY(0) rotate(0);
+   }
+`;
 
 const Wrapper = styled.div`
-   background-color: #0b0033;
    width: 100vw;
    height: 100vh;
-   padding: 40px 20px 0 20px;
+   padding: 0 20px;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -21,27 +52,18 @@ const CaptionWrapper = styled.div`
 `;
 
 const Caption = styled.div`
-   postiion: relative;
+   position: relative;
    z-index: 2;
    color: white;
    font-family: "League Spartan", sans-serif;
    font-size: 40px;
-   transition: transform 0.3s ease-out, color 0.1s ease-out;
+   transition: transform 0.3s ease-out, color 0.2s ease-out;
    &:hover {
       transform: translateY(-5px);
    }
-`;
-
-const Background = styled.div`
-   width: 100%;
-   height: 100%;
-   background-image: url(${littlePrince});
-   background-size: cover;
-   position: absolute;
-   top: 0;
-   left: 0;
-   z-index: 1;
-   opacity: ${(props) => props.backgroundopacity};
+   &.wiggle{
+      animation: ${wiggle} 2.5s cubic-bezier(.35,-0.23,.46,1.26) infinite;
+   }
 `;
 
 export default function Hero({ setIsMouseOverLetter }) {
@@ -51,7 +73,6 @@ export default function Hero({ setIsMouseOverLetter }) {
 
    const { language } = useContext(LanguageContext);
    const {
-      isDarkScreenDisplayed,
       backgroundOpacity,
       setBackgroundOpacity,
       isBackgroundOpacityComplete,
@@ -74,18 +95,22 @@ export default function Hero({ setIsMouseOverLetter }) {
       }
    }
 
+   useEffect(() => {
+      applyWiggle();
+   }, []);
+
    function changeBackgroundOpacity(lettersColored, totalCharacters) {
       const numberOfSpaces = heroCaption.split(" ").length - 1;
       const totalLetters = totalCharacters - numberOfSpaces;
-      const result = lettersColored / totalLetters / 2.5;
+      const newOpacity = lettersColored / totalLetters / 2.5;
       const MAX_VALUE = 0.4;
 
       // If a value already exists for background opacity, return. Else, apply new higher value
-      if (result <= backgroundOpacity) {
+      if (newOpacity <= backgroundOpacity) {
          return;
       } else {
-         if (result < MAX_VALUE) {
-            setBackgroundOpacity(result);
+         if (newOpacity < MAX_VALUE) {
+            setBackgroundOpacity(newOpacity);
          } else {
             setIsBackgroundOpacityComplete(true);
          }
@@ -116,9 +141,19 @@ export default function Hero({ setIsMouseOverLetter }) {
       }
    }
 
+   function applyWiggle() {
+      let letter = document.querySelector('[data-index="0"]');
+      letter.classList.add("wiggle");
+   }
+   function removeWiggle() {
+      let letter = document.querySelector('[data-index="0"]');
+      letter.classList.remove("wiggle");
+   }
+
    function handleOnMouseEntersLetter(e) {
       selectColor(e);
       setIsMouseOverLetter(true);
+      removeWiggle()
    }
    function handleOnMouseLeavesLetter(e) {
       setIsMouseOverLetter(false);
@@ -133,35 +168,56 @@ export default function Hero({ setIsMouseOverLetter }) {
    }
 
    return (
-      <Wrapper>
-         {isDarkScreenDisplayed && <DarkScreen />}
-         <Background backgroundopacity={backgroundOpacity} />
-         <CaptionWrapper>
-            {captionArray.map((letter, index) => {
-               if (letter === " ")
-                  return (
-                     <Caption
-                        key={index}
-                        data-key={`${index}-whitespace`}
-                        onMouseEnter={(e) => handleOnMouseEnterWhitespace(e)}
-                        onMouseLeave={(e) => handleOnMouseLeavesWhitespace(e)}
-                     >
-                        &nbsp;
-                     </Caption>
-                  );
-               else
-                  return (
-                     <Caption
-                        onMouseEnter={(e) => handleOnMouseEntersLetter(e)}
-                        onMouseLeave={(e) => handleOnMouseLeavesLetter(e)}
-                        key={index}
-                        data-key={`${index}-${letter}`}
-                     >
-                        {letter}
-                     </Caption>
-                  );
-            })}
-         </CaptionWrapper>
-      </Wrapper>
+      <motion.div
+         initial={{ x: 150, opacity: 0 }}
+         animate={{ x: 0, opacity: 1 }}
+         exit={{ x: -150, opacity: 0 }}
+         transition={{ opacity: { duration: 0.5 }, duration: 0.3 }}
+      >
+         <Wrapper>
+            <BackgroundImage
+               backgroundopacity={backgroundOpacity}
+               url={littlePrince}
+            />
+            <motion.div
+               initial={{ y: -150, opacity: 0 }}
+               animate={{ y: 0, opacity: 1 }}
+               exit={{ y: 150, opacity: 0 }}
+               transition={{ duration: 0.5, delay: 0.3 }}
+            >
+               <CaptionWrapper>
+                  {captionArray.map((letter, index) => {
+                     if (letter === " ")
+                        return (
+                           <Caption
+                              key={index}
+                              data-key={`${index}-whitespace`}
+                              onMouseEnter={(e) =>
+                                 handleOnMouseEnterWhitespace(e)
+                              }
+                              onMouseLeave={(e) =>
+                                 handleOnMouseLeavesWhitespace(e)
+                              }
+                           >
+                              &nbsp;
+                           </Caption>
+                        );
+                     else
+                        return (
+                           <Caption
+                              onMouseEnter={(e) => handleOnMouseEntersLetter(e)}
+                              onMouseLeave={(e) => handleOnMouseLeavesLetter(e)}
+                              key={index}
+                              data-index={index}
+                              data-key={`${index}-${letter}`}
+                           >
+                              {letter}
+                           </Caption>
+                        );
+                  })}
+               </CaptionWrapper>
+            </motion.div>
+         </Wrapper>
+      </motion.div>
    );
 }

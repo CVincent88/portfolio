@@ -45,8 +45,8 @@ const Caption = styled.span`
 `;
 
 const StarWrapper = styled.div`
-   width: 10px;
-   height: 10px;
+   width: 20px;
+   height: 20px;
    position: absolute;
    top: 10%;
    right: 10%;
@@ -69,15 +69,20 @@ const Star = styled.div`
    }
 `;
 
-export default function DarkScreen() {
+export default function DarkScreen({ setIsMouseOverStar }) {
    const { language } = useContext(LanguageContext);
-   const { setIsDarkScreenDisplayed } = useContext(DisplayContext);
+   const { isDarkScreenDisplayed, setIsDarkScreenDisplayed } =
+      useContext(DisplayContext);
 
    const explorationCaption =
       language === "fr" ? (
-         <Caption>L'exploration mène à de bien belles découvertes.</Caption>
+         <Caption>
+            Dans l'obscurité, la curiosité mène à de bien belles découvertes.
+         </Caption>
       ) : (
-         <Caption>Exploration leads to the greatest surprises.</Caption>
+         <Caption>
+            In darkness, curiosity leads to the greatest surprises.
+         </Caption>
       );
 
    function handleOnHoverStar(e) {
@@ -94,13 +99,19 @@ export default function DarkScreen() {
    }
 
    return (
-      <Wrapper id="darkScreen">
-         {explorationCaption}
-         <StarWrapper
-            onClick={(e) => handleOnHoverStar(e)}
-         >
-            <Star></Star>
-         </StarWrapper>
-      </Wrapper>
+      <>
+         {isDarkScreenDisplayed && (
+            <Wrapper id="darkScreen">
+               {explorationCaption}
+               <StarWrapper
+                  onClick={(e) => handleOnHoverStar(e)}
+                  onMouseEnter={() => setIsMouseOverStar(true)}
+                  onMouseLeave={() => setIsMouseOverStar(false)}
+               >
+                  <Star></Star>
+               </StarWrapper>
+            </Wrapper>
+         )}
+      </>
    );
 }

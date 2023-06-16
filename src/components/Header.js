@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { LanguageContext } from "../utils/context";
 import LanguageSelection from "./LanguageSelection";
+import NavbarLink from "./NavBarLink";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const Wrapper = styled.div`
    height: 60px;
@@ -18,57 +20,67 @@ const Wrapper = styled.div`
 `;
 const LinkWrapper = styled.div`
    display: flex;
-   gap: 15px;
+   align-items: center;
+   gap: 20px;
 `;
-
-const NavbarLink = styled(Link)`
-   text-decoration: none;
+const ContactButton = styled.span`
    font-family: "League Spartan", sans-serif;
    font-size: 20px;
    color: white;
+   display: inline-block;
+   position: relative;
+   text-decoration: none;
+   margin: 0 var(--spacing, 0px);
+   transition: margin 0.25s;
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+   width: 20px;
+   height: 20px;
+   color: white;
+   transition: color 0.3s;
+   transform: translateY(2px);
    &:hover {
-      color: red;
+      color: #3eb4e7;
    }
 `;
 
-export default function Header({ isMouseOverLink, setIsMouseOverLink }) {
+export default function Header({
+   isMouseOverLink,
+   setIsMouseOverLink,
+   setIsContactFormOpen,
+}) {
    const { language } = useContext(LanguageContext);
 
    return (
       <Wrapper id="header">
-         <LanguageSelection
-            isMouseOverLink={isMouseOverLink}
-            setIsMouseOverLink={setIsMouseOverLink}
-         />
+         <ContactButton
+            onClick={() => setIsContactFormOpen(true)}
+            onMouseEnter={() => setIsMouseOverLink(true)}
+            onMouseLeave={() => setIsMouseOverLink(false)}
+         >
+            <Icon icon={faEnvelope} />
+         </ContactButton>
          <LinkWrapper>
             <NavbarLink
-               to="/"
-               onMouseEnter={() => setIsMouseOverLink((true))}
-               onMouseLeave={() => setIsMouseOverLink((false))}
-            >
-               {language === "fr" ? "Accueil" : "Home"}
-            </NavbarLink>
+               path={""}
+               text={language === "fr" ? "Accueil" : "Home"}
+               setIsMouseOverLink={setIsMouseOverLink}
+            />
             <NavbarLink
-               to="/about"
-               onMouseEnter={() => setIsMouseOverLink((true))}
-               onMouseLeave={() => setIsMouseOverLink((false))}
-            >
-               {language === "fr" ? "À propos" : "About"}
-            </NavbarLink>
+               path={"about"}
+               text={language === "fr" ? "À propos" : "About"}
+               setIsMouseOverLink={setIsMouseOverLink}
+            />
             <NavbarLink
-               to="/skills"
-               onMouseEnter={() => setIsMouseOverLink((true))}
-               onMouseLeave={() => setIsMouseOverLink((false))}
-            >
-               {language === "fr" ? "Compétences" : "Skills"}
-            </NavbarLink>
-            <NavbarLink
-               to="/Projects"
-               onMouseEnter={() => setIsMouseOverLink((true))}
-               onMouseLeave={() => setIsMouseOverLink((false))}
-            >
-               {language === "fr" ? "Projets" : "Projects"}
-            </NavbarLink>
+               path={"projects"}
+               text={language === "fr" ? "Projets" : "Projects"}
+               setIsMouseOverLink={setIsMouseOverLink}
+            />
+            <LanguageSelection
+               isMouseOverLink={isMouseOverLink}
+               setIsMouseOverLink={setIsMouseOverLink}
+            />
          </LinkWrapper>
       </Wrapper>
    );

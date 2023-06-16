@@ -1,31 +1,26 @@
 import "./DotRing.css";
 import { useMousePosition } from "../../utils/hooks";
 
-export default function DotRing({ isMouseOverLink, isMouseOverLetter }) {
+export default function DotRing({
+   isMouseOverLink,
+   isMouseOverLetter,
+   isMouseOverStar,
+   isMouseOverInput
+}) {
    const { x, y } = useMousePosition();
+   const classes = [
+      "dot ",
+      isMouseOverLetter ? " hoverLetter " : "",
+      isMouseOverLink ? " hoverLink " : "",
+      isMouseOverStar ? " hoverStar " : "",
+      isMouseOverInput ? " hoverInput " : "",
+   ];
    return (
-      <div>
-         {/* 2. */}
-         {/* <div style={{ left: `${x}px`, top: `${y}px` }} className="ring"></div> */}
-         {/* 3. */}
-         {!isMouseOverLetter && !isMouseOverLink && (
-            <div
-               className="dot"
-               style={{ left: `${x}px`, top: `${y}px` }}
-            ></div>
-         )}
-         {isMouseOverLetter && (
-            <div
-               className="dot hoverLetter"
-               style={{ left: `${x}px`, top: `${y}px` }}
-            ></div>
-         )}
-         {isMouseOverLink && (
-            <div
-               className="dot hoverLink"
-               style={{ left: `${x}px`, top: `${y}px` }}
-            ></div>
-         )}
+      <div id="cursor">
+         <div
+            className={classes.join('')}
+            style={{ left: `${x}px`, top: `${y}px` }}
+         ></div>
       </div>
    );
 }
