@@ -30,7 +30,7 @@ function App() {
 
    return (
       <AppWrapper className="App" id="App">
-         <Router>
+         <Router basename="/portfolio">
             <LanguageProvider>
                <DisplayProvider>
                   {/* <BackgroundImage
