@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/portfolio/static/css/main.bc45bce0.css",
+    "main.js": "/portfolio/static/js/main.ae9d2937.js",
+    "static/media/chariots-gcs.png": "/portfolio/static/media/chariots-gcs.1dd91b8967f685783264.png",
+    "static/media/LaChouetteAgence_large.png": "/portfolio/static/media/LaChouetteAgence_large.1393ef19bbe0674428fd.png",
+    "static/media/chasse-galerie.png": "/portfolio/static/media/chasse-galerie.f922f4ab495e400d69ed.png",
+    "static/media/Groupomania_large.png": "/portfolio/static/media/Groupomania_large.7e0ce6029c7a8fd1e7ee.png",
+    "static/media/GOX.png": "/portfolio/static/media/GOX.6de217d64a16cb8e738c.png",
+    "static/media/the_little_prince_background.jpg": "/portfolio/static/media/the_little_prince_background.a3cde8e07fc83210c69e.jpg",
+    "static/media/Trellu_large.png": "/portfolio/static/media/Trellu_large.433984ced0893c2a2b76.png",
+    "static/media/desert_nuit.jpg": "/portfolio/static/media/desert_nuit.0c728d92733c4709081d.jpg",
+    "static/media/night.webp": "/portfolio/static/media/night.b1a5c84847f770213dae.webp",
+    "static/media/Connection_large.png": "/portfolio/static/media/Connection_large.63a301a72ac364eaad18.png",
+    "index.html": "/portfolio/index.html",
+    "main.bc45bce0.css.map": "/portfolio/static/css/main.bc45bce0.css.map",
+    "main.ae9d2937.js.map": "/portfolio/static/js/main.ae9d2937.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bc45bce0.css",
+    "static/js/main.ae9d2937.js"
+  ]
+}
