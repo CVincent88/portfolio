@@ -38,6 +38,7 @@ export default function SkillsCanvas() {
             { value: "MongoDB", weight: 8 },
             { value: "React Native", weight: 8 },
             { value: "VueJs", weight: 8 },
+            { value: "Figma", weight: 8 },
          ]}
       />
    );
