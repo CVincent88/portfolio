@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.bc45bce0.css",
-    "main.js": "/portfolio/static/js/main.a0fba796.js",
+    "main.css": "/portfolio/static/css/main.e35b9d27.css",
+    "main.js": "/portfolio/static/js/main.9c912bde.js",
     "static/media/chariots-gcs.png": "/portfolio/static/media/chariots-gcs.1dd91b8967f685783264.png",
     "static/media/LaChouetteAgence_large.png": "/portfolio/static/media/LaChouetteAgence_large.1393ef19bbe0674428fd.png",
     "static/media/chasse-galerie.png": "/portfolio/static/media/chasse-galerie.f922f4ab495e400d69ed.png",
@@ -13,11 +13,11 @@
     "static/media/night.webp": "/portfolio/static/media/night.b1a5c84847f770213dae.webp",
     "static/media/Connection_large.png": "/portfolio/static/media/Connection_large.63a301a72ac364eaad18.png",
     "index.html": "/portfolio/index.html",
-    "main.bc45bce0.css.map": "/portfolio/static/css/main.bc45bce0.css.map",
-    "main.a0fba796.js.map": "/portfolio/static/js/main.a0fba796.js.map"
+    "main.e35b9d27.css.map": "/portfolio/static/css/main.e35b9d27.css.map",
+    "main.9c912bde.js.map": "/portfolio/static/js/main.9c912bde.js.map"
   },
   "entrypoints": [
-    "static/css/main.bc45bce0.css",
-    "static/js/main.a0fba796.js"
+    "static/css/main.e35b9d27.css",
+    "static/js/main.9c912bde.js"
   ]
 }
