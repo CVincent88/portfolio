@@ -82,8 +82,8 @@ export default function Hero({ setIsMouseOverLetter }) {
    // Main hero caption
    const heroCaption =
       language === "fr"
-         ? "Hey ! Moi c'est Côme, développeur web front-end."
-         : "Hey ! I'm Côme, front-end web developper.";
+         ? "Hey ! Moi c'est Côme, développeur web full-stack."
+         : "Hey ! I'm Côme, full-stack web developper.";
 
    // Splits the caption into single characters whith spaces
    const captionArray = heroCaption.split("");

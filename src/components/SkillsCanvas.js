@@ -39,6 +39,10 @@ export default function SkillsCanvas() {
             { value: "React Native", weight: 8 },
             { value: "VueJs", weight: 8 },
             { value: "Figma", weight: 8 },
+            { value: "Shopify", weight: 8 },
+            { value: "Firebase", weight: 8 },
+            { value: "Vercel", weight: 8 },
+            { value: "NextJS", weight: 8 },
          ]}
       />
    );
